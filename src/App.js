@@ -1,25 +1,28 @@
-import React from "react";
-import Badge from "react-bootstrap/Badge";
-import { marked } from "marked";
+import React from 'react';
+import Badge from 'react-bootstrap/Badge';
+import { marked } from 'marked';
 
-const starterText = `Heading
-=======
+marked.setOptions({
+  breaks: true,
+});
 
-Sub-heading
------------
+const starterText = `![FreeCodeCamp](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/FreeCodeCamp_logo.svg/320px-FreeCodeCamp_logo.svg.png "FreeCodeCamp Logo")
 
-### Another deeper heading
+# Markdown Previewer
+## It really works!
 
-Paragraphs are separated
-by a blank line.
+\`\`\`
+const code = "This is code";
+console.log(code);
+\`\`\`
 
-Leave 2 spaces at the end of a line to do a
-line break
+Interpret carriage returns as
+\`<\\br>\`
+so that the test appears on a new line!
 
-Text attributes *italic*, **bold**,
-\`monospace\`,~~strikethrough~~ .
+Text attributes *italic*, **bold**, \`monospace\`,~~strikethrough~~ .
 
-Shopping list:
+Unordered List:
 * apples
 * oranges
 * pears
@@ -29,7 +32,11 @@ Numbered list:
 2. oranges
 3. pears
 
-*[Matthew Martin](https://www.freecodecamp.com/mmartin2409)*`;
+> Block quote
+
+by *[Matthew Martin](https://www.freecodecamp.com/mmartin2409)*
+`;
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -44,24 +51,24 @@ export default class App extends React.Component {
 
   render() {
     var inputStyle = {
-      width: "500px",
-      height: "80vh",
-      marginLeft: "auto",
-      marginRight: "auto",
-      padding: "5px",
+      width: '500px',
+      height: '80vh',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      padding: '5px',
       borderRadius: 5,
-      boxShadow: "10px 10px 5px 0px rgba(0,0,0,0.75)",
+      boxShadow: '10px 10px 5px 0px rgba(0,0,0,0.75)',
     };
     var outputStyle = {
-      width: "500px",
-      height: "80vh",
-      backgroundColor: "skyblue",
-      marginLeft: "auto",
-      marginRight: "auto",
-      padding: "5px",
-      border: "1px solid black",
+      width: '500px',
+      height: '80vh',
+      backgroundColor: 'skyblue',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      padding: '5px',
+      border: '1px solid black',
       borderRadius: 5,
-      boxShadow: "10px 10px 5px 0px rgba(0,0,0,0.75)",
+      boxShadow: '10px 10px 5px 0px rgba(0,0,0,0.75)',
     };
 
     return (
@@ -70,7 +77,7 @@ export default class App extends React.Component {
           <div className="row mt-4">
             <div className="col text-center">
               <h1>
-                {" "}
+                {' '}
                 <Badge className="text-align-center" bg="dark">
                   Markdown Previewer
                 </Badge>
@@ -80,7 +87,7 @@ export default class App extends React.Component {
 
           <div className="row mt-4">
             <div className="col-md-6">
-              {" "}
+              {' '}
               <div className="col text-center">
                 <h4>
                   <Badge className="text-align-center" bg="secondary">
@@ -90,6 +97,7 @@ export default class App extends React.Component {
               </div>
               <div className="input" style={inputStyle}>
                 <textarea
+                  id="editor"
                   className="input"
                   style={inputStyle}
                   value={this.state.markdown}
@@ -101,7 +109,7 @@ export default class App extends React.Component {
             </div>
 
             <div className="col-md-6">
-              {" "}
+              {' '}
               <div className="col text-center">
                 <h4>
                   <Badge className="text-align-center" bg="secondary">
@@ -110,6 +118,7 @@ export default class App extends React.Component {
                 </h4>
               </div>
               <div
+                id="preview"
                 style={outputStyle}
                 dangerouslySetInnerHTML={{
                   __html: marked(this.state.markdown),
